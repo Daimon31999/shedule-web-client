@@ -104,7 +104,7 @@ export default function Timer({
     // <div className="text-6xl font-bold text-blue flex flex-col justify-end ">
     <div
       className='
-    text-5xl items-center lg:items-stretch -mt-10 lg:-mt-16 lg:items
+    text-5xl items-center lg:items-stretch mt-10 lg:-mt-16 lg:items
     lg:text-6xl font-bold text-blue flex flex-col lg:justify-end '>
       <div className='flex items-center lg:justify-between'>
         <span>
