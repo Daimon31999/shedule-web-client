@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'gatsby'
 import LoginRegisterHeader from './../components/LoginRegisterHeader'
-
+import '../../static/tailwind.css'
+import '../css/App.css'
 import Axios from 'axios'
 
 export default function Register() {
