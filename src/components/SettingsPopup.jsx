@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import settingsImg from '../../static/assets/img/settings.png'
 import calendar_even from './../img/calendar_even.png'
 import calendar_odd from './../img/calendar_odd.png'

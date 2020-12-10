@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import ClipLoader from 'react-spinners/ClipLoader'
-import moment from 'moment'
 
 import Timer from '../components/Timer'
 import Timetable from '../components/Timetable'
 import CloudNav from '../components/CloudNav'
 
-import footerImg from './../img/footer.png'
 import sunImg from './../img/sun.png'
 import '../../static/tailwind.css'
 import '../css/App.css'
+import Axios from 'axios'
 
 export default function Home() {
   const [error, setError] = useState(null)
@@ -19,17 +18,15 @@ export default function Home() {
 
   const getDayOfWeek = () => {
     let days = [
-      'воскресение',
-      'понедельник',
-      'вторник',
-      'среда',
-      'четверг',
-      'пятница',
-      'суббота',
-      '',
+      'sunday',
+      'monday',
+      'tuesday',
+      'wednesday',
+      'thursday',
+      'friday',
+      'saturday',
     ]
     let todayIndex = new Date().getDay()
-    console.log('getDayOfWeek -> days[todayIndex]', days[todayIndex])
     return days[todayIndex]
   }
 
@@ -44,24 +41,19 @@ export default function Home() {
     return result
   }
 
-  console.log('parity', parity())
-
   useEffect(() => {
-    fetch('https://wshedule.herokuapp.com/shedule')
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setItems(result)
-          setIsLoaded(true)
-        },
-        (error) => {
-          setError(error)
-          setIsLoaded(true)
-        }
-      )
+    Axios({
+      method: 'GET',
+      withCredentials: true,
+      url: 'http://localhost:4000/user',
+    }).then((res) => {
+      setItems(res.data)
+      setIsLoaded(true)
+    })
   }, [])
 
   if (error) {
+    setError(true)
     return <div>Ошибка: {error.message}</div>
   } else if (!isLoaded) {
     const override = `
@@ -77,24 +69,8 @@ export default function Home() {
         loading={!isLoaded}
       />
     )
-  } else {
-    let timeTable = items[0].timeTable.slice(0)
-    // let count = 1
-    // let shortFormat = "hh:mm"
-    // let longFormat = "hh:mm:ss"
-
-    // for (let i = 0; i < items[0].timeTable.length * 2 - 2; i++) {
-    //   let startBreak = moment(
-    //     items[0].timeTable[count - 1][1],
-    //     shortFormat
-    //   ).format(shortFormat)
-    //   let endBreak = moment(items[0].timeTable[count][0], shortFormat).format(
-    //     shortFormat
-    //   )
-    //   count++
-    //   i++
-    //   timeTable.splice(i, 0, [startBreak, endBreak])
-    // }
+  } else if (items) {
+    let timetable = items.timetable.slice(0)
     return (
       <div id='index-wrapper'>
         <div id='index'>
@@ -102,26 +78,22 @@ export default function Home() {
             className='main-container
         w-full
         flex flex-col lg:flex-row gap-40 flex-shrink-0
-        '
-            //       className="main-container
-            // w-full bg-gradient-to-b from-sky via-white to-white
-            // flex flex-row gap-40 flex-shrink-0
-            // "
-          >
+        '>
             <CloudNav
               items={items}
               dayOfWeek={getDayOfWeek()}
               parity={parity()}
+              group={items.group}
             />
             <Timer
               items={items}
-              timeTable={timeTable}
+              timetable={timetable}
               dayOfWeek={getDayOfWeek()}
               breakIndex={breakIndex}
               parity={parity()}
             />
             <Timetable
-              timeTable={timeTable}
+              timetable={timetable}
               breakIndex={breakIndex}
               setBreakIndex={setBreakIndex}
             />
@@ -132,9 +104,13 @@ export default function Home() {
               alt='sun'
             />
           </div>
-          {/* <img className="absolute bottom-0" src={footerImg} alt="" /> */}
         </div>
       </div>
     )
+  } else {
+    let str = window.location.href
+    let loginUrl = str + 'login'
+    window.location.href = loginUrl
+    return <div>Redirect to Login</div>
   }
 }
