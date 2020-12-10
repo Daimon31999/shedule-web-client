@@ -5,6 +5,8 @@ import UserLoggedIn from '../components/login/UserLoggedIn'
 import UserNotLoggedIn from '../components/login/UserNotLoggedIn'
 import Alert from './../components/Alert'
 import CircleLoader from 'react-spinners/CircleLoader'
+import '../../static/tailwind.css'
+import '../css/App.css'
 
 export default function Login() {
   const [loginUsername, setLoginUsername] = useState('')
