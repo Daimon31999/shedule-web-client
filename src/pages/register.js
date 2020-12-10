@@ -17,7 +17,7 @@ export default function Register() {
         group: registerGroup,
       },
       withCredentials: true,
-      url: 'http://localhost:4000/register',
+      url: 'https://wshedule.herokuapp.com/register',
     }).then((res) => console.log(res))
   }
   return (

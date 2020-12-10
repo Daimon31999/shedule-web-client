@@ -6,7 +6,7 @@ export default function Test() {
   useEffect(() => {
     axios
       .put(
-        'http://localhost:4000/changeuser',
+        'https://wshedule.herokuapp.com/changeuser',
         { group: 'TI-999' },
         {
           withCredentials: true,

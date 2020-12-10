@@ -45,7 +45,7 @@ export default function Home() {
     Axios({
       method: 'GET',
       withCredentials: true,
-      url: 'http://localhost:4000/user',
+      url: 'https://wshedule.herokuapp.com/user',
     }).then((res) => {
       setItems(res.data)
       setIsLoaded(true)

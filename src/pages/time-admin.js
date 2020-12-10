@@ -21,7 +21,7 @@ export default function TimeAdmin({ location }) {
     Axios({
       method: 'GET',
       withCredentials: true,
-      url: 'http://localhost:4000/user',
+      url: 'https://wshedule.herokuapp.com/user',
     }).then((res) => {
       setItems(res.data)
       setLoading(false)
@@ -32,7 +32,7 @@ export default function TimeAdmin({ location }) {
     const group = items.group
 
     const save = async () => {
-      Axios.put('http://localhost:4000/timetable', items, {
+      Axios.put('https://wshedule.herokuapp.com/timetable', items, {
         withCredentials: true,
       })
         .then((r) => {

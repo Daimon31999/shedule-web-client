@@ -27,7 +27,7 @@ export default function Login() {
         group: loginGroup,
       },
       withCredentials: true,
-      url: 'http://localhost:4000/login',
+      url: 'https://wshedule.herokuapp.com/login',
     }).then((res) => {
       getUser()
       let str = window.location.href
@@ -36,7 +36,7 @@ export default function Login() {
     })
   }
   const logout = () => {
-    Axios.get('http://localhost:4000/logout')
+    Axios.get('https://wshedule.herokuapp.com/logout')
       .then(function (response) {
         // handle success
         document.cookie = 'connect.sid=hello'
@@ -52,7 +52,7 @@ export default function Login() {
     Axios({
       method: 'GET',
       withCredentials: true,
-      url: 'http://localhost:4000/user',
+      url: 'https://wshedule.herokuapp.com/user',
     }).then((res) => {
       setData(res.data)
       setIsLoaded(true)
@@ -67,7 +67,7 @@ export default function Login() {
         group: changeGroup,
       },
       withCredentials: true,
-      url: 'http://localhost:4000/changeuser',
+      url: 'https://wshedule.herokuapp.com/changeuser',
     }).then((res) => {
       setChangeIsOpen(false)
       setAlert(true)

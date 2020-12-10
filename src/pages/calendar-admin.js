@@ -18,7 +18,7 @@ export default function CalendarAdmin({ location }) {
     Axios({
       method: 'GET',
       withCredentials: true,
-      url: 'http://localhost:4000/user',
+      url: 'https://wshedule.herokuapp.com/user',
     }).then((res) => {
       setItems(res.data)
       setLoading(false)
@@ -47,7 +47,7 @@ export default function CalendarAdmin({ location }) {
       return days
     }
     const save = async () => {
-      Axios.put('http://localhost:4000/shedule', items, {
+      Axios.put('https://wshedule.herokuapp.com/shedule', items, {
         withCredentials: true,
       })
         .then((r) => {
